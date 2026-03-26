@@ -1,0 +1,1017 @@
+/* ================================================================
+   style.css — Your Portfolio Stylesheet
+   ================================================================
+
+   HOW THIS FILE IS ORGANISED:
+   1.  CSS Variables  (colours, fonts — change these to retheme the site)
+   2.  Reset & Base   (browser defaults removed)
+   3.  Grain Overlay  (subtle paper texture on the background)
+   4.  Animations     (scroll-reveal and page-load effects)
+   5.  Custom Cursor  (the small red dot that follows your mouse)
+   6.  Navigation     (the fixed top bar)
+   7.  Hero           (the first full-screen section)
+   8.  Section Base   (shared styles for all sections)
+   9.  About          (the about me section)
+   10. Projects/Work  (the research & projects grid)
+   11. CV / Timeline  (the two-column CV section)
+   12. Notes / Blog   (the photo + text card grid)
+   13. Contact        (the dark contact section)
+   14. Footer
+   15. Responsive     (mobile layout adjustments)
+
+   TO CHANGE THE COLOUR SCHEME:
+   Edit the values in the :root block below.
+   Everything on the site references these variables,
+   so changing them here changes the whole site at once.
+================================================================ */
+
+
+/* ────────────────────────────────────────────────────────────────
+   1. CSS VARIABLES (the site's colour palette and fonts)
+──────────────────────────────────────────────────────────────── */
+:root {
+  /* Background shades — creamy parchment feel */
+  --cream:      #f7f4ef;   /* main background */
+  --cream2:     #ede9e1;   /* slightly darker, used on card hover */
+  --parchment:  #e8e1d4;   /* image placeholder background */
+
+  /* Text colours */
+  --ink:        #1a1814;   /* near-black — headings and primary text */
+  --ink2:       #2e2b26;   /* slightly lighter body text */
+  --mid:        #6b6560;   /* muted text — descriptions, captions */
+  --light:      #b0aa9f;   /* very muted — dates, labels */
+
+  /* Border / rule colour */
+  --rule:       #d0c9bc;
+
+  /* Accent colours — used for highlights, links, and the red details */
+  --accent:     #8b3a2a;   /* deep academic red */
+  --accent2:    #c4531f;   /* warm copper (not used much, available) */
+  --gold:       #b8943a;   /* used in the dark contact/featured sections */
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   2. RESET & BASE STYLES
+──────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* makes clicking nav links scroll smoothly */
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.75;
+  overflow-x: hidden; /* prevents horizontal scroll on mobile */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   3. GRAIN OVERLAY (subtle paper texture — purely decorative)
+   If you want to remove it, delete this whole block.
+──────────────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; /* doesn't block clicking */
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   4. SCROLL REVEAL ANIMATIONS
+   Elements with class="reveal" start invisible and fade in
+   when they scroll into view. script.js handles the trigger.
+──────────────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   5. CUSTOM CURSOR
+──────────────────────────────────────────────────────────────── */
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none; /* doesn't interfere with clicking */
+  z-index: 10000;
+  transition: transform 0.15s ease;
+  mix-blend-mode: multiply; /* blends with content underneath */
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   6. NAVIGATION BAR
+──────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(247, 244, 239, 0.92); /* semi-transparent cream */
+  backdrop-filter: blur(8px);            /* frosted glass effect */
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+/* A thin line appears under the nav once you start scrolling */
+nav.scrolled {
+  border-bottom-color: var(--rule);
+}
+
+/* Your name on the left of the nav */
+.nav-name {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* The nav links list */
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Karla', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   7. HERO SECTION
+──────────────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh; /* fills the whole screen */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two equal columns */
+  align-items: center;
+  padding: 120px 48px 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 80px;
+}
+
+/* Small "RESEARCHER · ANALYST · PHYSICIST" label above the headline */
+.hero-label {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* The short line before the label text */
+.hero-label::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* Main headline */
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 6vw, 86px); /* clamp = responsive font size */
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+/* The italic red word in the headline */
+h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* The one or two sentence bio below the headline */
+.hero-bio {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--mid);
+  max-width: 420px;
+  margin-bottom: 40px;
+  font-family: 'Karla', sans-serif;
+  font-weight: 300;
+}
+
+/* The two buttons in the hero */
+.hero-ctas {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Dark filled button */
+.btn-primary {
+  font-family: 'Karla', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--ink);
+  padding: 13px 28px;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Underline-only link button */
+.btn-secondary {
+  font-family: 'Karla', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-secondary:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* The 2x2 stats grid on the right side of the hero */
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--rule);
+}
+
+.stat {
+  padding: 28px 32px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Remove right border from every second stat (right column) */
+.stat:nth-child(2n) { border-right: none; }
+/* Remove bottom border from last two stats (bottom row) */
+.stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.stat-num sup {
+  font-size: 20px;
+  vertical-align: super;
+}
+
+.stat-label {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--light);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   8. SECTION BASE STYLES (shared by all sections)
+──────────────────────────────────────────────────────────────── */
+.section-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 100px 48px;
+}
+
+/* The "§ 01 / About me" header row at the top of each section */
+.section-header {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 48px;
+  align-items: baseline;
+  border-top: 1px solid var(--rule);
+  padding-top: 32px;
+  margin-bottom: 64px;
+}
+
+.section-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--light);
+}
+
+/* Section headings (h2) */
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+h2 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   9. ABOUT SECTION
+──────────────────────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px; /* main text | narrow sidebar */
+  gap: 80px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 19px;
+  line-height: 1.85;
+  color: var(--ink2);
+  margin-bottom: 24px;
+}
+
+/* The big decorative first letter (drop cap) */
+.about-text p:first-of-type:not(.lead)::first-letter {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 72px;
+  font-weight: 400;
+  float: left;
+  line-height: 0.8;
+  margin-right: 8px;
+  margin-top: 8px;
+  color: var(--accent);
+}
+
+/* The italic pull-quote paragraph */
+.about-text p.lead {
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--mid);
+  border-left: 2px solid var(--accent);
+  padding-left: 24px;
+  margin-bottom: 32px;
+}
+
+/* Right-side aside column */
+.about-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.aside-block {
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+}
+
+.aside-label {
+  font-family: 'Karla', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--light);
+  margin-bottom: 12px;
+}
+
+.aside-block p {
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* The skill tag pills */
+.skill-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-list li {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  border: 1px solid var(--rule);
+  padding: 4px 12px;
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   10. PROJECTS / WORK SECTION
+──────────────────────────────────────────────────────────────── */
+
+/* The outer grid — gap: 2px creates thin ruled lines between cards */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--rule); /* the gap colour shows through as rules */
+}
+
+/* Individual project cards */
+.project-card {
+  background: var(--cream);
+  padding: 44px 48px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* The arrow that appears in the corner of each card */
+.project-card::after {
+  content: '→';
+  position: absolute;
+  right: 32px;
+  top: 44px;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+  color: var(--light);
+  transition: color 0.2s, right 0.2s;
+}
+
+.project-card:hover { background: var(--cream2); }
+
+.project-card:hover::after {
+  color: var(--accent);
+  right: 28px;
+}
+
+/* The small tag above the project title */
+.project-tag {
+  font-family: 'Karla', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.project-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.project-card p {
+  font-family: 'Karla', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+/* The big dark featured card — spans both columns */
+.project-card.featured {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.project-card.featured:hover { background: var(--ink2); }
+
+.project-card.featured .project-tag { color: var(--gold); }
+.project-card.featured h3 { font-size: 34px; color: var(--cream); }
+.project-card.featured p { color: var(--light); }
+.project-card.featured::after { color: var(--gold); top: auto; bottom: 44px; }
+
+/* The right-side stats panel inside the featured card */
+.featured-meta {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  padding-left: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.featured-stat {
+  margin-bottom: 28px;
+}
+
+.featured-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--cream);
+}
+
+.featured-stat-label {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 239, 0.4);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   11. CV / TIMELINE SECTION
+──────────────────────────────────────────────────────────────── */
+.cv-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+/* Column headings ("Education", "Experience") */
+.cv-column h3 {
+  font-family: 'Karla', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--light);
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each timeline entry */
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* The year on the left */
+.timeline-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--light);
+  padding-top: 4px;
+  text-align: right;
+}
+
+/* Red italic year for current/ongoing roles */
+.timeline-year.current {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.timeline-role {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.timeline-place {
+  font-family: 'Karla', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.timeline-desc {
+  font-family: 'Karla', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--mid);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   12. NOTES / BLOG SECTION
+──────────────────────────────────────────────────────────────── */
+.notes-intro {
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  color: var(--mid);
+  max-width: 500px;
+  margin-bottom: 48px;
+  line-height: 1.8;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--rule);
+}
+
+.note-card {
+  background: var(--cream);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.note-card:hover { background: var(--cream2); }
+
+/* Placeholder image box (replace with <img> when you have photos) */
+.note-image {
+  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--parchment);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note-image-placeholder {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--light);
+}
+
+/* Real image (when you add one) */
+.note-image-real {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover; /* crops the image to fill the box neatly */
+  display: block;
+}
+
+.note-body {
+  padding: 24px 28px 28px;
+}
+
+.note-date {
+  font-family: 'Karla', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--light);
+  margin-bottom: 8px;
+}
+
+.note-card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.note-card p {
+  font-family: 'Karla', sans-serif;
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.65;
+}
+
+.note-tag {
+  display: inline-block;
+  font-family: 'Karla', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  padding: 3px 10px;
+  margin-bottom: 12px;
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   13. CONTACT SECTION (dark background)
+──────────────────────────────────────────────────────────────── */
+#contact {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* Override the shared section-header styles for the dark background */
+#contact .section-header {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+#contact .section-num { color: rgba(247, 244, 239, 0.2); }
+#contact h2 { color: var(--cream); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.contact-intro {
+  font-family: 'Karla', sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(247, 244, 239, 0.55);
+  margin-bottom: 40px;
+}
+
+/* The list of email / LinkedIn / GitHub links */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  color: var(--cream);
+  transition: color 0.2s;
+}
+
+.contact-link:hover { color: var(--gold); }
+
+.contact-link-label {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 239, 0.3);
+  min-width: 100px;
+}
+
+.contact-link-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  flex: 1;
+  text-align: right;
+  padding-right: 16px;
+}
+
+.contact-link-arrow {
+  color: rgba(247, 244, 239, 0.2);
+  font-size: 16px;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.contact-link:hover .contact-link-arrow {
+  color: var(--gold);
+  transform: translateX(4px);
+}
+
+/* Contact form (right column) */
+.contact-form-wrap {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  padding-left: 80px;
+}
+
+.contact-form-wrap h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 28px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Karla', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 239, 0.35);
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--cream);
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.form-submit {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--cream);
+  border: none;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.form-submit:hover { background: var(--gold); }
+
+
+/* ────────────────────────────────────────────────────────────────
+   14. FOOTER
+──────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 28px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer p {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(247, 244, 239, 0.2);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   15. RESPONSIVE STYLES (mobile & tablet)
+   These rules only apply when the screen is narrower than 900px.
+──────────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+
+  /* Hero: stack into a single column */
+  #hero {
+    grid-template-columns: 1fr;
+    padding: 100px 28px 60px;
+    gap: 48px;
+  }
+
+  /* Hide the stats grid on mobile — too cramped */
+  .hero-stats { display: none; }
+
+  /* About: stack into a single column */
+  .about-grid { grid-template-columns: 1fr; }
+
+  /* Projects: single column */
+  .projects-grid { grid-template-columns: 1fr; }
+
+  /* Featured card: single column */
+  .project-card.featured {
+    grid-column: span 1;
+    grid-template-columns: 1fr;
+  }
+
+  .featured-meta {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 28px;
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  /* CV: single column */
+  .cv-layout { grid-template-columns: 1fr; }
+
+  /* Notes: two columns */
+  .notes-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Contact: single column */
+  .contact-grid { grid-template-columns: 1fr; }
+
+  .contact-form-wrap {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 40px;
+  }
+
+  /* Reduce section padding */
+  .section-wrap { padding: 80px 28px; }
+
+  nav { padding: 18px 28px; }
+  .nav-links { gap: 24px; }
+}
+
+@media (max-width: 600px) {
+
+  /* Notes: single column on small phones */
+  .notes-grid { grid-template-columns: 1fr; }
+
+  /* Hide most nav links — only keep the last one */
+  .nav-links li:not(:last-child) { display: none; }
+
+  /* Section header: remove the side number */
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
