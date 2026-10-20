@@ -3,26 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-  <title>Buddy Alcock — Fusion Energy Analyst</title>
-  <meta name="description" content="MSc Fusion Energy student at the University of York, BSc Physics. Analyst at Fusion Advisory Services. Portfolio and CV.">
-  <meta name="keywords" content="fusion energy, plasma physics, fusion steels, Buddy Alcock, physicist, researcher">
+
+  <title>Buddy Alcock — Fusion Materials Researcher and Analyst</title>
+  <meta name="description" content="PhD researcher in fusion materials (RAFM steels) at the University of Manchester. MSc Fusion Energy (Distinction), BSc Physics (First). Junior Analyst at Fusion Advisory Services.">
   <meta name="author" content="Buddy Alcock">
- 
-  <meta property="og:title" content="Buddy Alcock — Fusion Energy Analyst">
-  <meta property="og:description" content="MSc Fusion Energy · BSc Physics · Analyst at Fusion Advisory Services">
+
+  <meta property="og:title" content="Buddy Alcock — Fusion Materials Researcher and Analyst">
+  <meta property="og:description" content="PhD researcher, University of Manchester · Junior Analyst, Fusion Advisory Services">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://alcockbuddy.github.io">
   <meta property="og:image" content="images/profile.jpg">
- 
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+Upright:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
- 
+
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Project cards are not links: hide any arrow/hover cue */
+    .project-card, .project-card * { cursor: default; }
+    .project-card::before, .project-card::after,
+    .featured-left::after, .featured-meta::after { content: none !important; }
+  </style>
 </head>
 <body>
- 
- 
+
+
   <!-- NAVIGATION -->
   <nav id="navbar">
     <a href="#hero" class="nav-name">Buddy Alcock</a>
@@ -33,45 +38,45 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
- 
- 
+
+
   <!-- HERO -->
   <section id="hero">
     <div class="hero-left">
       <div class="hero-label reveal">Researcher · Analyst · Physicist</div>
-      <h1 class="reveal" style="animation-delay:0.1s">Analyst and<br>researcher in<br><em>fusion energy</em></h1>
+      <h1 class="reveal" style="animation-delay:0.1s">Fusion materials<br>researcher and<br><em>analyst</em></h1>
       <p class="hero-bio reveal" style="animation-delay:0.2s">
-        MSc Fusion Energy at the University of York · BSc Physics · Analyst at Fusion Advisory Services. Based in Leeds, UK.
+        PhD researcher at the University of Manchester and Fusion Power CDT student, working on RAFM steels for fusion. Junior Analyst at Fusion Advisory Services.
       </p>
       <div class="hero-ctas reveal" style="animation-delay:0.3s">
         <a href="#work" class="btn-primary">View Research</a>
-        <a href="pdfs/Academic_CV.pdf" class="btn-secondary" target="_blank">Download CV</a>
+        <a href="#contact" class="btn-secondary">Get in touch</a>
       </div>
     </div>
- 
+
     <div class="hero-right reveal" style="animation-delay:0.2s">
       <div class="hero-stats">
         <div class="stat">
+          <div class="stat-num">PhD</div>
+          <div class="stat-label">RAFM Steels · Manchester</div>
+        </div>
+        <div class="stat">
           <div class="stat-num">MSc</div>
-          <div class="stat-label">Fusion Energy</div>
+          <div class="stat-label">Fusion Energy · Distinction</div>
         </div>
         <div class="stat">
           <div class="stat-num">BSc</div>
-          <div class="stat-label">Physics</div>
+          <div class="stat-label">Physics · First Class</div>
         </div>
         <div class="stat">
           <div class="stat-num">Analyst</div>
-          <div class="stat-label">Fusion Sector · 2025–Current</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">1st</div>
-          <div class="stat-label">BSc Honours</div>
+          <div class="stat-label">Fusion Advisory Services</div>
         </div>
       </div>
     </div>
   </section>
- 
- 
+
+
   <!-- ABOUT -->
   <section id="about">
     <div class="section-wrap">
@@ -82,43 +87,36 @@
       <div class="about-grid">
         <div class="about-text reveal">
           <p>
-            I am a Junior Fusion Energy Analyst at <strong>Fusion Advisory Services</strong>,
-            where I provide technical information and insights to decision-makers in the
-            fusion sector and beyond.
+            I am a PhD researcher at the <strong>University of Manchester</strong> and a
+            student in the <strong>Fusion Power Centre for Doctoral Training (CDT)</strong>,
+            studying reduced-activation ferritic/martensitic (RAFM) steels for fusion.
+            I hold an MSc in Fusion Energy (Distinction) and a BSc in Physics
+            (First Class) from the University of York.
           </p>
           <p>
-            My work focuses on translating scientific developments into
-            clear, useful information for those navigating the fusion industry.
-            I aim to help bridge the gap between research and decision-making.
-          </p>
-          <p>
-            I am currently studying for an <strong>MSc in Fusion Energy at the
-            University of York</strong>, building on my BSc in Physics.
-            I am also a member of the <strong>Institute of Physics</strong>, 
-            staying active within the broader UK physics community.
+            Alongside my research, I am a Junior Fusion Energy Analyst at
+            <strong>Fusion Advisory Services</strong>, where I turn technical developments
+            in the fusion sector into clear information for decision-makers. I am also a
+            member of the <strong>Institute of Physics</strong>.
           </p>
         </div>
- 
+
         <div class="about-aside reveal" style="animation-delay:0.15s">
-          <div class="aside-block">
-            <div class="aside-label">Current position</div>
-            <p>Analyst, Fusion Advisory Services<br>MSc Student, Fusion Energy — University of York</p>
-          </div>
           <div class="aside-block">
             <div class="aside-label">Research interests</div>
             <ul class="skill-list">
-              <li>Fusion Steels</li>
-              <li>Plasma Physics</li>
-              <li>Materials Science</li>
+              <li>RAFM Steels</li>
               <li>Radiation Damage</li>
+              <li>Fusion Materials</li>
+              <li>Plasma Physics</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
   </section>
- 
- 
+
+
   <!-- RESEARCH & PROJECTS -->
   <section id="work">
     <div class="section-wrap">
@@ -126,15 +124,54 @@
         <div class="section-num">§ 02</div>
         <h2>Research &amp; <em>projects</em></h2>
       </div>
- 
+
       <div class="projects-grid reveal">
- 
+
         <div class="project-card featured">
           <div class="featured-left">
-            <span class="project-tag" style="color: #c5a059;">Featured · BSc Thesis</span>
+            <span class="project-tag" style="color: #c5a059;">Current · PhD</span>
+            <h3>RAFM Steels for Fusion</h3>
+            <p>Reduced-activation ferritic/martensitic steels are leading candidates for structural components in future fusion power plants. My PhD at the University of Manchester investigates their behaviour under the demands of a fusion environment, as part of the Fusion Power CDT.</p>
+          </div>
+          <div class="featured-meta">
+            <div class="featured-stat">
+              <div class="featured-stat-num">RAFM</div>
+              <div class="featured-stat-label">Reduced-activation steels</div>
+            </div>
+            <div class="featured-stat">
+              <div class="featured-stat-num">Materials</div>
+              <div class="featured-stat-label">Radiation damage</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card featured">
+          <div class="featured-left">
+            <span class="project-tag" style="color: #c5a059;">MSc Project</span>
+            <h3>Bayesian Optimisation of Tokamak Pedestal Stability</h3>
+            <p>H-mode tokamak plasmas are prone to edge localised modes (ELMs), which the peeling-ballooning model links to the pedestal pressure gradient and toroidal current. I used Bayesian optimisation to choose which points in this parameter space to evaluate, generating equilibria with FreeGS and testing MHD stability with ELITE. </p>
+          </div>
+          <div class="featured-meta">
+            <div class="featured-stat">
+              <div class="featured-stat-num">FreeGS</div>
+              <div class="featured-stat-label">Plasma equilibrium generation</div>
+            </div>
+            <div class="featured-stat">
+              <div class="featured-stat-num">ELITE</div>
+              <div class="featured-stat-label">Peeling-ballooning stability</div>
+            </div>
+            <div class="featured-stat">
+              <div class="featured-stat-num">Bayesian</div>
+              <div class="featured-stat-label">Gaussian process optimisation</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card featured">
+          <div class="featured-left">
+            <span class="project-tag" style="color: #c5a059;">BSc Thesis</span>
             <h3>Multi-Pulse Laser Wakefield Acceleration</h3>
             <p>Used particle-in-cell simulations to compare multi-pulse and single-pulse laser wakefield acceleration. Correcting pulse spacing for relativistic electron masses, a five-pulse system achieved self-injection using 0.15 J less energy than a conventional single-pulse approach.</p>
-            <a href="pdfs/BSc_Dissertation.pdf" class="btn-secondary" style="margin-top: 20px; display: inline-block;">Read full thesis (PDF)</a>
           </div>
           <div class="featured-meta">
             <div class="featured-stat">
@@ -151,12 +188,12 @@
             </div>
           </div>
         </div>
- 
+
       </div>
     </div>
   </section>
- 
- 
+
+
   <!-- CV -->
   <section id="cv">
     <div class="section-wrap">
@@ -164,68 +201,81 @@
         <div class="section-num">§ 03</div>
         <h2>Curriculum <em>Vitæ</em></h2>
       </div>
- 
+
       <div class="cv-layout">
- 
+
         <div class="cv-column reveal">
           <h3>Education</h3>
           <div class="timeline">
- 
+
             <div class="timeline-item">
-              <div class="timeline-year current">2025 →</div>
+              <div class="timeline-year current">2026 →</div>
+              <div class="timeline-content">
+                <div class="timeline-role">PhD, Fusion Materials</div>
+                <div class="timeline-place">University of Manchester</div>
+                <div class="timeline-desc">
+                  Research on RAFM steels for fusion power applications, as part of the Fusion Power Centre for Doctoral Training (CDT).
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2025–26</div>
               <div class="timeline-content">
                 <div class="timeline-role">MSc, Fusion Energy</div>
                 <div class="timeline-place">University of York</div>
                 <div class="timeline-desc">
-                  Working toward an MSc with a focus on plasma measurement, computational physics, and diagnostics.
-                  Completed lab work includes ICF X-ray diagnostics and JET tokamak simulations.
+                  Graduated with <strong>Distinction</strong>. Focus on plasma measurement,
+                  computational physics and diagnostics, including ICF X-ray diagnostics
+                  and JET tokamak simulations.
                 </div>
               </div>
             </div>
- 
+
             <div class="timeline-item">
               <div class="timeline-year">2021–24</div>
               <div class="timeline-content">
                 <div class="timeline-role">BSc, Physics</div>
                 <div class="timeline-place">University of York</div>
                 <div class="timeline-desc">
-                  Achieved <strong>First Class Honours</strong>. Final year project:
+                  Graduated with <strong>First Class Honours</strong>. Final year project:
                   <em>Investigating Multi-Pulse Laser Wakefield Acceleration Through Simulations</em>.
                 </div>
               </div>
             </div>
- 
-            <div class="timeline-item">
-              <div class="timeline-year">2019–21</div>
-              <div class="timeline-content">
-                <div class="timeline-role">A-Levels</div>
-                <div class="timeline-place">University Technical College, Leeds</div>
-                <div class="timeline-desc">
-                  Mathematics (A*), Product Design (A*), Physics (A), and EPQ (A).
-                </div>
-              </div>
-            </div>
- 
+
           </div>
         </div>
- 
+
         <div class="cv-column reveal" style="animation-delay:0.15s">
           <h3>Experience</h3>
           <div class="timeline">
- 
+
+            <div class="timeline-item">
+              <div class="timeline-year current">2026 →</div>
+              <div class="timeline-content">
+                <div class="timeline-role">Postgraduate Researcher</div>
+                <div class="timeline-place">University of Manchester · Fusion Power CDT</div>
+                <div class="timeline-desc">
+                  Researching RAFM steels for fusion applications as a student
+                  in the Fusion Power Centre for Doctoral Training (CDT).
+                </div>
+              </div>
+            </div>
+
             <div class="timeline-item">
               <div class="timeline-year current">2025 →</div>
               <div class="timeline-content">
-                <div class="timeline-role">Fusion Energy Analyst</div>
+                <div class="timeline-role">Junior Fusion Energy Analyst</div>
                 <div class="timeline-place">Fusion Advisory Services</div>
                 <div class="timeline-desc">
                   Providing technical insights for governments and investors.
-                  Contributing to reports on the private fusion sector, key technologies,
+                  Contributing to reports on the private fusion sector and key technologies,
                   and performing technical due diligence.
                 </div>
               </div>
             </div>
- 
+
             <div class="timeline-item">
               <div class="timeline-year">2024–25</div>
               <div class="timeline-content">
@@ -237,46 +287,41 @@
                 </div>
               </div>
             </div>
- 
+
             <div class="timeline-item">
               <div class="timeline-year">2022</div>
               <div class="timeline-content">
                 <div class="timeline-role">Research Internship</div>
                 <div class="timeline-place">University of York</div>
                 <div class="timeline-desc">
-                  Utilised the <em>Viking</em> supercomputer to run EPOCH particle-in-cell
-                  simulations investigating laser wakefield acceleration.
+                  Ran EPOCH particle-in-cell simulations of laser wakefield acceleration
+                  on the <em>Viking</em> supercomputer.
                 </div>
               </div>
             </div>
- 
+
           </div>
         </div>
- 
+
       </div>
- 
-      <div style="margin-top: 56px;" class="reveal">
-        <a href="pdfs/Academic_CV.pdf" class="btn-primary" target="_blank">Download Full CV (PDF)</a>
-      </div>
- 
+
     </div>
   </section>
- 
- 
- 
+
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-wrap">
       <div class="section-header reveal">
-        <div class="section-num">§ 05</div>
+        <div class="section-num">§ 04</div>
         <h2>Get in <em>touch</em></h2>
       </div>
- 
+
       <div class="contact-simple reveal">
         <p class="contact-intro">
-          I'm open to conversations about fusion research, collaboration, and opportunities.
+          I'm open to conversations about fusion materials, collaboration, and opportunities.
         </p>
- 
+
         <div class="contact-links-bar">
           <a href="mailto:alcockbuddy@gmail.com" class="contact-link">
             <span class="contact-link-label">Email</span>
@@ -297,16 +342,14 @@
       </div>
     </div>
   </section>
- 
- 
+
+
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 Buddy Alcock — All rights reserved</p>
-    <p>Built with HTML &amp; CSS · Hosted on GitHub Pages</p>
+    <p>© 2026 Buddy Alcock</p>
   </footer>
- 
+
   <script src="script.js"></script>
- 
+
 </body>
 </html>
- 
